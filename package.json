@@ -4,8 +4,8 @@
   "description": "Homework 12",
   "main": "employeeTracker.js",
   "dependencies": {
-    "inquirer": "^6.2.1",
-    "mysql": "^2.16.0"
+    "inquirer": "^6.5.2",
+    "mysql": "^2.18.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
