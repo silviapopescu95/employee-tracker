@@ -70,21 +70,21 @@ async function start() {
   }
 }
 
-async function viewDepartments() {
+function viewDepartments() {
   connection.query("SELECT * FROM department", function(err, res) {
     if (err) throw err;
     console.table(res);
   });
 }
 
-async function viewRoles() {
+function viewRoles() {
   connection.query("SELECT * FROM roles", function(err, res) {
     if (err) throw err;
     console.table(res);
   });
 }
 
-async function viewEmployees() {
+function viewEmployees() {
   connection.query("SELECT * FROM employee", function(err, res) {
     if (err) throw err;
     console.table(res);
