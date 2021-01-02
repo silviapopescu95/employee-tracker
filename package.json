@@ -4,6 +4,7 @@
   "description": "Homework 12",
   "main": "employeeTracker.js",
   "dependencies": {
+    "console.table": "^0.10.0",
     "inquirer": "^6.5.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.6"
