@@ -117,17 +117,58 @@ function addItem() {
   }
 }
 
-// async function addDepartment() {
-  
-// }
+async function addDepartment() {
+  connection.query("INSERT INTO department SET ?", { name }, function(err) {
+    if (err) throw err;
+  })
+}
 
-// async function addRole() {
-  
-// }
+async function addRole() {
+  const { newRole } = await inquirer.prompt({
+    type: "input",
+    name: "newRole",
+    message: "What is the title of the new role?"
+  });
+  const { salary } = await inquirer.prompt({
+    type: "number",
+    name: "salary",
+    message: "What is the yearly salary of this new role?"
+  });
+  const { department_id } = await inquirer.prompt({
+    type: "number",
+    name: "department_id",
+    message: "What is the department ID of this new role?"
+  });
+  connection.query("INSERT INTO roles SET ?", { title: newRole, salary: salary, department_id: department_id }, function(err) {
+    if (err) throw err;
+  });
+}
 
-// async function addEmployee() {
-  
-// }
+async function addEmployee() {
+  const { newEmpFirst } = await inquirer.prompt({
+    type: "input",
+    name: "newEmpFirst",
+    message: "What is the new employee's first name?"
+  });
+  const { newEmpLast } = await inquirer.prompt({
+    type: "input",
+    name: "newEmpLast",
+    message: "What is the new employee's last name?"
+  });
+  const { role_id } = await inquirer.prompt({
+    type: "number",
+    name: "role_id",
+    message: "What is the role ID for this new employee?"
+  });
+  const { manager_id } = await inquirer.prompt({
+    type: "number",
+    name: "manager_id",
+    message: "What is the manager ID for this new employee?"
+  });
+  connection.query("INSERT INTO employee SET ?", { first_name: newEmpFirst, last_name: newEmpLast, role_id: role_id, manager_id: manager_id }, function(err) {
+    if (err) throw err;
+  })
+}
 
 async function updateRole() {
   
