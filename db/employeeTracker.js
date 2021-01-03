@@ -53,15 +53,18 @@ async function start() {
     case "View all employees":
       await viewEmployees();
       break;
-    case "Add a new department":
-      await addDepartment();
-      break;
-    case "Add a new role":
-      await addRole();
-      break;
-    case "Add a new employee":
-      await addEmployee();
-      break;   
+    case "Add a new department, role, or employee":
+      await addItem();
+      break;  
+    // case "Add a new department":
+    //   await addDepartment();
+    //   break;
+    // case "Add a new role":
+    //   await addRole();
+    //   break;
+    // case "Add a new employee":
+    //   await addEmployee();
+    //   break;   
     case "Update an employee role":
       await updateRole();
       break;
@@ -91,17 +94,40 @@ function viewEmployees() {
   });
 }
 
-async function addDepartment() {
-  
+function addItem() {
+  // Figure out user's choice in what type of item to add
+  const { choice } = await inquirer.prompt({
+    type: "list",
+    name: "choice",
+    message: "What would you like to add to the Employee Tracker?",
+    choices: ["Department", "Role", "Employee"],
+  });
+  switch (choicePrompt) {
+    case "Department":
+      await addDepartment();
+      break;
+    case "Role":
+      await addRole();
+      break;
+    case "Employee":
+      await addEmployee();
+      break;  
+    default: 
+      connection.end();      
+  }
 }
 
-async function addRole() {
+// async function addDepartment() {
   
-}
+// }
 
-async function addEmployee() {
+// async function addRole() {
   
-}
+// }
+
+// async function addEmployee() {
+  
+// }
 
 async function updateRole() {
   
