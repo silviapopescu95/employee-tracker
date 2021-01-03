@@ -6,13 +6,10 @@ const util = require("util");
 // create the connection information for the sql database
 var connection = mysql.createConnection({
   host: "localhost",
-
   // Your port; if not 3306
   port: 3306,
-
   // Your username
   user: "root",
-
   // Your password
   password: "Fo$teR<35",
   database: "employeeTracker_DB"
@@ -56,15 +53,6 @@ async function start() {
     case "Add a new department, role, or employee":
       await addItem();
       break;  
-    // case "Add a new department":
-    //   await addDepartment();
-    //   break;
-    // case "Add a new role":
-    //   await addRole();
-    //   break;
-    // case "Add a new employee":
-    //   await addEmployee();
-    //   break;   
     case "Update an employee role":
       await updateRole();
       break;
