@@ -34,9 +34,7 @@ async function start() {
       "View all departments",
       "View all roles",
       "View all employees",
-      "Add a new department",
-      "Add a new role",
-      "Add a new employee",
+      "Add a new department, role, or employee",
       "Update an employee role"
     ],
   });
@@ -82,9 +80,9 @@ function viewEmployees() {
   });
 }
 
-function addItem() {
+async function addItem() {
   // Figure out user's choice in what type of item to add
-  const { choice } = await inquirer.prompt({
+  const { choicePrompt } = await inquirer.prompt({
     type: "list",
     name: "choice",
     message: "What would you like to add to the Employee Tracker?",
@@ -105,24 +103,34 @@ function addItem() {
   }
 }
 
-async function addDepartment() {
-  connection.query("INSERT INTO department SET ?", { name }, function(err) {
+function addDepartment() {
+  const { newDept } = inquirer.prompt({
+    type: "input",
+    name: "newDept",
+    message: "What is the name of the new department?"
+  });
+  const { department_id } = inquirer.prompt({
+    type: "number",
+    name: "department_id",
+    message: "What is the ID of the new department?"
+  });
+  connection.query("INSERT INTO department SET ?", { name: newDept, department_id: department_id }, function(err) {
     if (err) throw err;
   })
 }
 
-async function addRole() {
-  const { newRole } = await inquirer.prompt({
+function addRole() {
+  const { newRole } = inquirer.prompt({
     type: "input",
     name: "newRole",
     message: "What is the title of the new role?"
   });
-  const { salary } = await inquirer.prompt({
+  const { salary } = inquirer.prompt({
     type: "number",
     name: "salary",
     message: "What is the yearly salary of this new role?"
   });
-  const { department_id } = await inquirer.prompt({
+  const { department_id } = inquirer.prompt({
     type: "number",
     name: "department_id",
     message: "What is the department ID of this new role?"
@@ -132,23 +140,23 @@ async function addRole() {
   });
 }
 
-async function addEmployee() {
-  const { newEmpFirst } = await inquirer.prompt({
+function addEmployee() {
+  const { newEmpFirst } = inquirer.prompt({
     type: "input",
     name: "newEmpFirst",
     message: "What is the new employee's first name?"
   });
-  const { newEmpLast } = await inquirer.prompt({
+  const { newEmpLast } = inquirer.prompt({
     type: "input",
     name: "newEmpLast",
     message: "What is the new employee's last name?"
   });
-  const { role_id } = await inquirer.prompt({
+  const { role_id } = inquirer.prompt({
     type: "number",
     name: "role_id",
     message: "What is the role ID for this new employee?"
   });
-  const { manager_id } = await inquirer.prompt({
+  const { manager_id } = inquirer.prompt({
     type: "number",
     name: "manager_id",
     message: "What is the manager ID for this new employee?"
@@ -159,5 +167,5 @@ async function addEmployee() {
 }
 
 async function updateRole() {
-  
+  // Having troubles with the one
 }
